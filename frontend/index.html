@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Analyze news articles with natural language processing and explore their entities, keywords, and summaries."
+    />
+    <title>AI News Intelligence</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar" aria-label="Main navigation">
+        <a class="brand" href="#dashboard" aria-label="AI News Intelligence home">
+          <span class="brand-mark" aria-hidden="true">N</span>
+          <span>AI News <strong>Intelligence</strong></span>
+        </a>
+        <button
+          class="menu-toggle"
+          id="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+          aria-label="Open navigation menu"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="primary-navigation">
+          <a href="#dashboard">Dashboard</a>
+          <a href="#pipeline">NLP Pipeline</a>
+          <a href="#about">About</a>
+          <span class="nav-badge">NLP Powered</span>
+        </div>
+      </nav>
+    </header>
+
+    <main id="dashboard">
+      <section class="hero section-shell" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span aria-hidden="true">✦</span> Natural Language Processing</p>
+          <h1 id="hero-title">Turn news into <span>intelligence.</span></h1>
+          <p class="hero-description">
+            Analyze news articles with natural language processing and discover the people,
+            organizations, places, keywords, and insights hidden in the text.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#analyzer">Start analysis <span aria-hidden="true">→</span></a>
+            <button class="button button-secondary" id="hero-sample-button" type="button">Load demo article</button>
+          </div>
+          <p class="hero-note"><span aria-hidden="true">●</span> Clear insights from the words that matter</p>
+        </div>
+        <div class="hero-visual" aria-label="Illustration of extracted news entities" role="img">
+          <div class="visual-orbit orbit-one"></div>
+          <div class="visual-orbit orbit-two"></div>
+          <div class="visual-core"><span aria-hidden="true">✧</span><small>NEWS<br />INSIGHTS</small></div>
+          <div class="entity-float entity-person"><span class="entity-icon" aria-hidden="true">P</span><span><small>PERSON</small><strong>Key people</strong></span></div>
+          <div class="entity-float entity-org"><span class="entity-icon" aria-hidden="true">O</span><span><small>ORGANIZATION</small><strong>Companies</strong></span></div>
+          <div class="entity-float entity-location"><span class="entity-icon" aria-hidden="true">L</span><span><small>LOCATION</small><strong>Places</strong></span></div>
+          <div class="entity-float entity-date"><span class="entity-icon" aria-hidden="true">D</span><span><small>DATE</small><strong>Time signals</strong></span></div>
+        </div>
+      </section>
+
+      <section class="section-shell analyzer-section" id="analyzer" aria-labelledby="analyzer-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Your workspace</p>
+            <h2 id="analyzer-title">Analyze your news article</h2>
+          </div>
+          <p>Paste an article or choose a plain text file to get started.</p>
+        </div>
+        <form class="input-card" id="article-form">
+          <label class="visually-hidden" for="article-input">News article text</label>
+          <textarea
+            id="article-input"
+            name="article"
+            rows="9"
+            maxlength="50000"
+            placeholder="Paste a news article here and let NLP uncover the important details..."
+            required
+          ></textarea>
+          <div class="input-meta">
+            <span id="input-counts" aria-live="polite">0 characters · 0 words</span>
+            <span>Maximum 50,000 characters</span>
+          </div>
+          <div class="input-toolbar">
+            <div class="input-tools">
+              <label class="button button-quiet upload-button" for="article-file">
+                <span aria-hidden="true">↑</span> Upload .txt
+              </label>
+              <input class="visually-hidden" id="article-file" type="file" accept=".txt,text/plain" />
+              <span id="selected-file" class="selected-file" aria-live="polite">No file selected</span>
+              <button class="text-button" id="sample-button" type="button">Load sample</button>
+            </div>
+            <div class="input-actions">
+              <button class="button button-quiet" id="clear-button" type="reset">Clear</button>
+              <button class="button button-primary" id="analyze-button" type="submit">Analyze article <span aria-hidden="true">→</span></button>
+            </div>
+          </div>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="section-shell pipeline-section" id="pipeline" aria-labelledby="pipeline-title">
+        <div class="section-heading compact-heading">
+          <div><p class="eyebrow">Behind the analysis</p><h2 id="pipeline-title">NLP processing pipeline</h2></div>
+          <span class="pipeline-status" id="pipeline-status" role="status" aria-live="polite">Waiting for an article</span>
+        </div>
+        <ol class="pipeline-list" id="pipeline-list">
+          <li class="pipeline-step" data-step="cleaning"><span class="step-icon" aria-hidden="true">01</span><span><strong>Text cleaning</strong><small>Normalize the article</small></span><span class="step-status">Waiting</span></li>
+          <li class="pipeline-step" data-step="tokenization"><span class="step-icon" aria-hidden="true">02</span><span><strong>Tokenization</strong><small>Split text into tokens</small></span><span class="step-status">Waiting</span></li>
+          <li class="pipeline-step" data-step="stopwords"><span class="step-icon" aria-hidden="true">03</span><span><strong>Stopword removal</strong><small>Filter common words</small></span><span class="step-status">Waiting</span></li>
+          <li class="pipeline-step" data-step="pos"><span class="step-icon" aria-hidden="true">04</span><span><strong>POS tagging</strong><small>Identify grammatical roles</small></span><span class="step-status">Waiting</span></li>
+          <li class="pipeline-step" data-step="ner"><span class="step-icon" aria-hidden="true">05</span><span><strong>Entity recognition</strong><small>Find names and places</small></span><span class="step-status">Waiting</span></li>
+          <li class="pipeline-step" data-step="keywords"><span class="step-icon" aria-hidden="true">06</span><span><strong>TF-IDF analysis</strong><small>Rank article keywords</small></span><span class="step-status">Waiting</span></li>
+          <li class="pipeline-step" data-step="summary"><span class="step-icon" aria-hidden="true">07</span><span><strong>Summary generation</strong><small>Select key sentences</small></span><span class="step-status">Waiting</span></li>
+        </ol>
+      </section>
+
+      <section class="section-shell results-section" id="results" aria-labelledby="results-title" aria-live="polite">
+        <div class="section-heading">
+          <div><p class="eyebrow">Your article at a glance</p><h2 id="results-title">Analysis overview</h2></div>
+          <span class="results-caption" id="results-caption">Results will appear here after analysis</span>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><span class="stat-label">Total words</span><strong id="stat-words">—</strong><span class="stat-footnote">in this article</span></article>
+          <article class="stat-card"><span class="stat-label">Unique words</span><strong id="stat-unique">—</strong><span class="stat-footnote">distinct terms</span></article>
+          <article class="stat-card"><span class="stat-label">Sentences</span><strong id="stat-sentences">—</strong><span class="stat-footnote">identified in text</span></article>
+          <article class="stat-card"><span class="stat-label">Entities</span><strong id="stat-entities">—</strong><span class="stat-footnote">named references</span></article>
+          <article class="stat-card"><span class="stat-label">Keywords</span><strong id="stat-keywords">—</strong><span class="stat-footnote">ranked by TF-IDF</span></article>
+        </div>
+      </section>
+
+      <section class="section-shell content-grid" aria-label="Article analysis results">
+        <article class="panel entity-panel" id="entities" aria-labelledby="entities-title">
+          <div class="panel-heading"><div><p class="eyebrow">Who and where</p><h2 id="entities-title">Named entities</h2></div><span class="panel-count" id="entity-count">—</span></div>
+          <div class="entity-groups" id="entity-groups">
+            <div class="entity-group"><h3><span class="entity-dot person-dot"></span>People</h3><ul id="people-list"><li class="empty-state">Entities will appear after analysis.</li></ul></div>
+            <div class="entity-group"><h3><span class="entity-dot org-dot"></span>Organizations</h3><ul id="organizations-list"><li class="empty-state">—</li></ul></div>
+            <div class="entity-group"><h3><span class="entity-dot location-dot"></span>Locations</h3><ul id="locations-list"><li class="empty-state">—</li></ul></div>
+            <div class="entity-group"><h3><span class="entity-dot date-dot"></span>Dates</h3><ul id="dates-list"><li class="empty-state">—</li></ul></div>
+            <div class="entity-group"><h3><span class="entity-dot money-dot"></span>Money</h3><ul id="money-list"><li class="empty-state">—</li></ul></div>
+          </div>
+        </article>
+
+        <article class="panel keyword-panel" id="keywords" aria-labelledby="keywords-title">
+          <div class="panel-heading"><div><p class="eyebrow">What stands out</p><h2 id="keywords-title">Top keywords</h2></div><span class="method-tag">TF-IDF</span></div>
+          <ol class="keyword-list" id="keyword-list"><li class="empty-state">Keywords will appear after analysis.</li></ol>
+        </article>
+      </section>
+
+      <section class="section-shell content-grid">
+        <article class="panel chart-panel" id="frequency" aria-labelledby="frequency-title">
+          <div class="panel-heading"><div><p class="eyebrow">Term patterns</p><h2 id="frequency-title">Word frequency</h2></div><span class="method-tag">Most frequent terms</span></div>
+          <div class="chart-container"><canvas id="frequency-chart" aria-label="Bar chart of the most frequent words" role="img"></canvas><p class="empty-state chart-empty" id="chart-empty">The word frequency chart will appear after analysis.</p></div>
+        </article>
+        <article class="panel summary-panel" id="summary" aria-labelledby="summary-title">
+          <div class="panel-heading"><div><p class="eyebrow">Key points</p><h2 id="summary-title">Article summary</h2></div><span class="method-tag">Extractive</span></div>
+          <p class="summary-text empty-state" id="summary-text">A concise summary will appear after analysis.</p>
+        </article>
+      </section>
+
+      <section class="section-shell content-grid detail-grid">
+        <article class="panel pos-panel" id="pos-tags" aria-labelledby="pos-title">
+          <div class="panel-heading"><div><p class="eyebrow">Grammar in context</p><h2 id="pos-title">Part-of-speech tags</h2></div></div>
+          <div class="table-scroll"><table><thead><tr><th scope="col">Token</th><th scope="col">Tag</th><th scope="col">Description</th></tr></thead><tbody id="pos-table-body"><tr><td class="empty-state" colspan="3">POS tags will appear after analysis.</td></tr></tbody></table></div>
+        </article>
+        <article class="panel preprocessing-panel" id="preprocessing" aria-labelledby="preprocessing-title">
+          <div class="panel-heading"><div><p class="eyebrow">From raw text to tokens</p><h2 id="preprocessing-title">Preprocessing</h2></div></div>
+          <div class="comparison-block"><h3>Original text</h3><p id="original-preview" class="empty-state">Your article text will appear here.</p></div>
+          <div class="comparison-block"><h3>Processed text</h3><p id="processed-text" class="empty-state">Cleaned, lowercased tokens without stopwords or punctuation will appear here.</p></div>
+        </article>
+      </section>
+
+      <section class="section-shell highlighted-section" id="highlighted-article" aria-labelledby="highlighted-title">
+        <div class="section-heading"><div><p class="eyebrow">Entities in context</p><h2 id="highlighted-title">Highlighted article</h2></div><p>Recognized entities will be highlighted in the original text.</p></div>
+        <article class="panel highlighted-text empty-state" id="highlighted-text">Your analyzed article with highlighted entities will appear here.</article>
+        <div class="legend" aria-label="Entity highlight legend"><span><i class="legend-person"></i>Person</span><span><i class="legend-org"></i>Organization</span><span><i class="legend-location"></i>Location</span><span><i class="legend-date"></i>Date</span><span><i class="legend-money"></i>Money</span></div>
+      </section>
+
+      <section class="section-shell about-section" id="about" aria-labelledby="about-title">
+        <div><p class="eyebrow">A simple NLP workflow</p><h2 id="about-title">How the analysis works</h2><p>Each stage applies a standard natural language processing technique to turn unstructured news text into useful, inspectable results.</p></div>
+        <ol class="about-flow"><li>Preprocessing</li><li>Tokenization</li><li>POS tagging</li><li>Named entities</li><li>TF-IDF keywords</li><li>Extractive summary</li></ol>
+      </section>
+    </main>
+
+    <footer class="site-footer"><a class="brand" href="#dashboard"><span class="brand-mark" aria-hidden="true">N</span><span>AI News <strong>Intelligence</strong></span></a><p>Built with Python and natural language processing.</p><a href="#dashboard">Back to top ↑</a></footer>
+  </body>
+</html>
